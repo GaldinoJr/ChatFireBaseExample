@@ -136,6 +136,7 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
             Intent chatIntent = new Intent(mContextViewHolder, ChatActivity.class);
             chatIntent.putExtra(ExtraIntent.EXTRA_CURRENT_USER_ID, mCurrentUserId);
             chatIntent.putExtra(ExtraIntent.EXTRA_RECIPIENT_ID, user.getRecipientId());
+            chatIntent.putExtra(ExtraIntent.EXTRA_RECIPIENT_PLAYER_ID, user.getPlayerID());
             chatIntent.putExtra(ExtraIntent.EXTRA_CHAT_REF, chatRef);
 
             // Start new activity

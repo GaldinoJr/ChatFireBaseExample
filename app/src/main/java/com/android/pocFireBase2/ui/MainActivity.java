@@ -72,27 +72,6 @@ public class MainActivity extends Activity {
         setAuthListener();
     }
 
-    private void sendNotification(String userId)
-    {
-        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
-//        String userId = status.getSubscriptionStatus().getUserId();
-//        String pushToken = status.getSubscriptionStatus().getPushToken();
-        boolean isSubscribed = status.getSubscriptionStatus().getSubscribed();
-
-        if (isSubscribed) {
-//            textView.setText("Subscription Status, is subscribed:" + isSubscribed);
-            try {
-                JSONObject notificationContent = new JSONObject("{'contents': {'en': 'The notification message or body'}," +
-                        "'include_player_ids': ['" + userId + "'], " +
-                        "'headings': {'en': 'Notification Title'}, " +
-                        "'big_picture': 'http://i.imgur.com/DKw1J2F.gif'}");
-                OneSignal.postNotification(notificationContent, null);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private void bindButterKnife() {
         ButterKnife.bind(this);
     }

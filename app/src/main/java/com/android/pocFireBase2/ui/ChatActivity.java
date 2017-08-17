@@ -17,7 +17,6 @@ import com.android.pocFireBase2.R;
 import com.android.pocFireBase2.adapter.MessageChatAdapter;
 import com.android.pocFireBase2.model.ChatMessage;
 import com.onesignal.OSPermissionSubscriptionState;
-import com.onesignal.OSSubscriptionState;
 import com.onesignal.OneSignal;
 
 import org.json.JSONException;
@@ -42,6 +41,7 @@ public class ChatActivity extends Activity {
     private MessageChatAdapter messageChatAdapter;
     private DatabaseReference messageChatDatabase;
     private ChildEventListener messageChatListener;
+    private String mRecipientPlayerID;
 
 
     @Override
@@ -64,6 +64,7 @@ public class ChatActivity extends Activity {
     }
 
     private void setUsersId() {
+        mRecipientPlayerID = getIntent().getStringExtra(ExtraIntent.EXTRA_RECIPIENT_PLAYER_ID);
         mRecipientId = getIntent().getStringExtra(ExtraIntent.EXTRA_RECIPIENT_ID);
         mCurrentUserId = getIntent().getStringExtra(ExtraIntent.EXTRA_CURRENT_USER_ID);
     }
@@ -138,6 +139,8 @@ public class ChatActivity extends Activity {
 
         if(!senderMessage.isEmpty()){
 
+            sendNotification(mRecipientPlayerID);
+
             ChatMessage newMessage = new ChatMessage(senderMessage,mCurrentUserId,mRecipientId);
             messageChatDatabase.push().setValue(newMessage);
 
@@ -145,4 +148,24 @@ public class ChatActivity extends Activity {
         }
     }
 
+    private void sendNotification(String playerID)
+    {
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+//        String userId = status.getSubscriptionStatus().getUserId();
+//        String pushToken = status.getSubscriptionStatus().getPushToken();
+        boolean isSubscribed = status.getSubscriptionStatus().getSubscribed();
+
+        if (isSubscribed) {
+//            textView.setText("Subscription Status, is subscribed:" + isSubscribed);
+            try {
+                JSONObject notificationContent = new JSONObject("{'contents': {'en': 'The notification message or body'}," +
+                        "'include_player_ids': ['" + playerID + "'], " +
+                        "'headings': {'en': 'Notification Title'}, " +
+                        "'big_picture': 'http://i.imgur.com/DKw1J2F.gif'}");
+                OneSignal.postNotification(notificationContent, null);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
