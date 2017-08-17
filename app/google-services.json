@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "948812403029",
+    "firebase_url": "https://pocfirebase2-49606.firebaseio.com",
+    "project_id": "pocfirebase2-49606",
+    "storage_bucket": "pocfirebase2-49606.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948812403029:android:6e3defed99cd5a87",
+        "android_client_info": {
+          "package_name": "com.android.pocFireBase2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948812403029-od2lbb4n1cqhelnvvoplmvua10tb2hj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.pocFireBase2",
+            "certificate_hash": "5b97ee3792f5d8fecd2072d5f4e3ef058f3e6295"
+          }
+        },
+        {
+          "client_id": "948812403029-s59eqs7jdd4ktk808af8r15qnn58j60n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF3mhyu_dtvM-Edey8e-59smJFnZhV_1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948812403029-s59eqs7jdd4ktk808af8r15qnn58j60n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

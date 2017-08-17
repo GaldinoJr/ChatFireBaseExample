@@ -4,7 +4,7 @@
                 android:layout_height="match_parent"
               android:orientation="vertical"
               android:background="@color/primary"
-                tools:context="com.marceme.marcefirebasechat.login.LogInActivity">
+                tools:context="com.android.pocFireBase2.login.LogInActivity">
 
 
     <!-- For the purpose of the app, many attributes are not refactored-->

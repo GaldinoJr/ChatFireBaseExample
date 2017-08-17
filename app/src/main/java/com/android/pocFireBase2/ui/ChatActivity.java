@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat.ui;
+package com.android.pocFireBase2.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,10 +12,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.marceme.marcefirebasechat.FireChatHelper.ExtraIntent;
-import com.marceme.marcefirebasechat.R;
-import com.marceme.marcefirebasechat.adapter.MessageChatAdapter;
-import com.marceme.marcefirebasechat.model.ChatMessage;
+import com.android.pocFireBase2.FireChatHelper.ExtraIntent;
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.adapter.MessageChatAdapter;
+import com.android.pocFireBase2.model.ChatMessage;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OSSubscriptionState;
+import com.onesignal.OneSignal;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -138,6 +144,5 @@ public class ChatActivity extends Activity {
             mUserMessageChatText.setText("");
         }
     }
-
 
 }

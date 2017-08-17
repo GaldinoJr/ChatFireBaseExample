@@ -1,11 +1,10 @@
-package com.marceme.marcefirebasechat.login;
+package com.android.pocFireBase2.login;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -13,12 +12,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.marceme.marcefirebasechat.FireChatHelper.ChatHelper;
-import com.marceme.marcefirebasechat.R;
-import com.marceme.marcefirebasechat.adapter.UsersChatAdapter;
-import com.marceme.marcefirebasechat.register.RegisterActivity;
-import com.marceme.marcefirebasechat.ui.MainActivity;
+import com.android.pocFireBase2.FireChatHelper.ChatHelper;
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.adapter.UsersChatAdapter;
+import com.android.pocFireBase2.register.RegisterActivity;
+import com.android.pocFireBase2.ui.MainActivity;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OSSubscriptionState;
+import com.onesignal.OneSignal;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,6 +87,12 @@ public class LogInActivity extends Activity {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
+
+                // TODO registra o player ID
+                String playerId = getPlayerID();
+                String userId = mAuth.getCurrentUser().getUid();
+                dataBase.child("users").child(userId).child("playerID").setValue(playerId);
 
                 dismissAlertDialog();
 
@@ -136,5 +145,15 @@ public class LogInActivity extends Activity {
 
     private void dismissAlertDialog() {
         dialog.dismiss();
+    }
+
+    private String getPlayerID()
+    {
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+        OSSubscriptionState var = status.getSubscriptionStatus();
+        String playerID = var.getUserId();
+//        String pushToken = var.getPushToken();
+        return playerID;
+
     }
 }

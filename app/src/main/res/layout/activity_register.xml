@@ -4,7 +4,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:background="@color/primary"
-                tools:context="com.marceme.marcefirebasechat.register.RegisterActivity">
+                tools:context="com.android.pocFireBase2.register.RegisterActivity">
 
     <!-- For the purpose of the app, many attributes are not refactored-->
 

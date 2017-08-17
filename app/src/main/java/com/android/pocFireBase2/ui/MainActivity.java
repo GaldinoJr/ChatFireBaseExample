@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat.ui;
+package com.android.pocFireBase2.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,10 +18,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.marceme.marcefirebasechat.R;
-import com.marceme.marcefirebasechat.adapter.UsersChatAdapter;
-import com.marceme.marcefirebasechat.login.LogInActivity;
-import com.marceme.marcefirebasechat.model.User;
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.adapter.UsersChatAdapter;
+import com.android.pocFireBase2.login.LogInActivity;
+import com.android.pocFireBase2.model.User;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OSSubscriptionState;
+import com.onesignal.OneSignal;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +70,27 @@ public class MainActivity extends Activity {
         setUserRecyclerView();
         setUsersKeyList();
         setAuthListener();
+    }
+
+    private void sendNotification(String userId)
+    {
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+//        String userId = status.getSubscriptionStatus().getUserId();
+//        String pushToken = status.getSubscriptionStatus().getPushToken();
+        boolean isSubscribed = status.getSubscriptionStatus().getSubscribed();
+
+        if (isSubscribed) {
+//            textView.setText("Subscription Status, is subscribed:" + isSubscribed);
+            try {
+                JSONObject notificationContent = new JSONObject("{'contents': {'en': 'The notification message or body'}," +
+                        "'include_player_ids': ['" + userId + "'], " +
+                        "'headings': {'en': 'Notification Title'}, " +
+                        "'big_picture': 'http://i.imgur.com/DKw1J2F.gif'}");
+                OneSignal.postNotification(notificationContent, null);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void bindButterKnife() {

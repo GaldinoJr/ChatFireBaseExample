@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat.register;
+package com.android.pocFireBase2.register;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,11 +15,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.marceme.marcefirebasechat.FireChatHelper.ChatHelper;
-import com.marceme.marcefirebasechat.R;
-import com.marceme.marcefirebasechat.adapter.UsersChatAdapter;
-import com.marceme.marcefirebasechat.model.User;
-import com.marceme.marcefirebasechat.ui.MainActivity;
+import com.android.pocFireBase2.FireChatHelper.ChatHelper;
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.adapter.UsersChatAdapter;
+import com.android.pocFireBase2.model.User;
+import com.android.pocFireBase2.ui.MainActivity;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OSSubscriptionState;
+import com.onesignal.OneSignal;
 
 import java.util.Date;
 
@@ -169,5 +172,4 @@ public class RegisterActivity extends Activity{
                 new Date().getTime()
                 );
     }
-
 }

@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat.adapter;
+package com.android.pocFireBase2.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.marceme.marcefirebasechat.FireChatHelper.ChatHelper;
-import com.marceme.marcefirebasechat.FireChatHelper.ExtraIntent;
-import com.marceme.marcefirebasechat.R;
-import com.marceme.marcefirebasechat.model.User;
-import com.marceme.marcefirebasechat.ui.ChatActivity;
+import com.android.pocFireBase2.FireChatHelper.ChatHelper;
+import com.android.pocFireBase2.FireChatHelper.ExtraIntent;
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.model.User;
+import com.android.pocFireBase2.ui.ChatActivity;
 
 import java.util.List;
 

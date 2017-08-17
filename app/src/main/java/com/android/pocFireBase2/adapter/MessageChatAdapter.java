@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat.adapter;
+package com.android.pocFireBase2.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.marceme.marcefirebasechat.R;
-import com.marceme.marcefirebasechat.model.ChatMessage;
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.model.ChatMessage;
 
 import java.util.List;
 

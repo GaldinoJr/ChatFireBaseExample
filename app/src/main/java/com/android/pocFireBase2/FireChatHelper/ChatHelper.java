@@ -1,10 +1,9 @@
-package com.marceme.marcefirebasechat.FireChatHelper;
+package com.android.pocFireBase2.FireChatHelper;
 
 import android.app.AlertDialog;
 import android.content.Context;
 
-import com.marceme.marcefirebasechat.R;
-import com.marceme.marcefirebasechat.login.LogInActivity;
+import com.android.pocFireBase2.R;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat.model;
+package com.android.pocFireBase2.model;
 
 import com.google.firebase.database.Exclude;
 

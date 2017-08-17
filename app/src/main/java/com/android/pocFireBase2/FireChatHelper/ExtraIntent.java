@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat.FireChatHelper;
+package com.android.pocFireBase2.FireChatHelper;
 
 /**
  * @author Marcelino Yax-marce7j@gmail.com-Android Developer

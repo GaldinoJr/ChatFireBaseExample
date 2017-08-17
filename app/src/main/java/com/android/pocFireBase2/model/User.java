@@ -1,7 +1,6 @@
-package com.marceme.marcefirebasechat.model;
+package com.android.pocFireBase2.model;
 
 import com.google.firebase.database.Exclude;
-import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
  * @author Marcelino Yax-marce7j@gmail.com-Android Developer
@@ -15,11 +14,13 @@ public class User {
     private String connection;
     private int avatarId;
     private long createdAt;
+    private String playerID;
 
     private String mRecipientId;
 
     public User() {
     }
+
 
     public User(String displayName, String email, String connection, int avatarId, long createdAt) {
         this.displayName = displayName;
@@ -69,6 +70,10 @@ public class User {
 
     public int getAvatarId() {
         return avatarId;
+    }
+
+    public String getPlayerID() {
+        return playerID;
     }
 
     @Exclude

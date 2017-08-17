@@ -1,4 +1,4 @@
-package com.marceme.marcefirebasechat;
+package com.android.pocFireBase2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -3,14 +3,16 @@ apply plugin: 'com.android.application'
 android {
 
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
-        applicationId "com.marceme.marcefirebasechat"
+        applicationId "com.android.pocFireBase2"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [onesignal_app_id: "46e40424-3cc6-4944-ae3f-fdc0126900ad",
+                                onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {
         release {
@@ -24,10 +26,17 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.+'
     compile 'de.hdodenhof:circleimageview:2.0.0'
 
-    compile 'com.google.firebase:firebase-database:10.0.1'
-    compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.google.firebase:firebase-database:11.0.4'
+    compile 'com.google.firebase:firebase-auth:11.0.4'
     
     compile 'com.jakewharton:butterknife:8.4.0'
+
+    // Required for OneSignal
+    compile 'com.onesignal:OneSignal:3.+@aar'
+    // Required for OneSignal
+    compile 'com.google.android.gms:play-services-gcm:11.0.4'
+    // Required for geotagging
+    compile "com.google.android.gms:play-services-location:11.0.4"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 apply plugin: 'com.google.gms.google-services'
