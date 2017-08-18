@@ -35,8 +35,6 @@ import butterknife.OnClick;
 public class LogInActivity extends AppCompatActivity {
 
     private static final String TAG = LogInActivity.class.getSimpleName();
-//    @BindView(R.id.edit_text_email_login) EditText mUserEmail;
-//    @BindView(R.id.edit_text_password_log_in) EditText mUserPassWord;
 
     @BindView(R.id.edittext_login_user_nickname) EditText mUserNicknameEditText;
 
