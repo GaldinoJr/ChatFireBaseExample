@@ -1,28 +1,32 @@
 package com.android.pocFireBase2.login;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.pocFireBase2.FireChatHelper.ChatHelper;
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.adapter.UsersChatAdapter;
+import com.android.pocFireBase2.model.User;
+import com.android.pocFireBase2.ui.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.android.pocFireBase2.FireChatHelper.ChatHelper;
-import com.android.pocFireBase2.R;
-import com.android.pocFireBase2.adapter.UsersChatAdapter;
-import com.android.pocFireBase2.register.RegisterActivity;
-import com.android.pocFireBase2.ui.MainActivity;
 import com.onesignal.OSPermissionSubscriptionState;
 import com.onesignal.OSSubscriptionState;
 import com.onesignal.OneSignal;
+
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,16 +35,19 @@ import butterknife.OnClick;
 public class LogInActivity extends AppCompatActivity {
 
     private static final String TAG = LogInActivity.class.getSimpleName();
-    @BindView(R.id.edit_text_email_login) EditText mUserEmail;
-    @BindView(R.id.edit_text_password_log_in) EditText mUserPassWord;
+//    @BindView(R.id.edit_text_email_login) EditText mUserEmail;
+//    @BindView(R.id.edit_text_password_log_in) EditText mUserPassWord;
+
+    @BindView(R.id.edittext_login_user_nickname) EditText mUserNicknameEditText;
 
     private FirebaseAuth mAuth;
     private AlertDialog dialog;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_login);
 
 //        hideActionBar();
         bindButterKnife();
@@ -59,15 +66,21 @@ public class LogInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    @OnClick(R.id.btn_login)
+    @OnClick(R.id.button_login_connect)
     public void logInClickListener(Button button) {
-        onLogInUser();
+        if(TextUtils.isEmpty(mUserNicknameEditText.getText())) {
+            Toast.makeText(this,getString(R.string.login_error_message),Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            onLogInUser();
+        }
     }
 
-    @OnClick(R.id.btn_register)
-    public void registerClickListener(Button button) {
-        goToRegisterActivity();
-    }
+//    @OnClick(R.id.btn_register)
+//    public void registerClickListener(Button button) {
+//        goToRegisterActivity();
+//    }
 
     private void onLogInUser() {
         if(getUserEmail().equals("") || getUserPassword().equals("")){
@@ -81,27 +94,26 @@ public class LogInActivity extends AppCompatActivity {
         showAlertDialog(getString(R.string.error_incorrect_email_pass),true);
     }
 
-    private void logIn(String email, String password) {
+    private void logIn(final String email, final String password) {
 
         showAlertDialog("Log In...",false);
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
+                if(mAuth.getCurrentUser() != null) {
+                    dismissAlertDialog();
 
-                // TODO registra o player ID
-                String playerId = getPlayerID();
-                String userId = mAuth.getCurrentUser().getUid();
-                dataBase.child("users").child(userId).child("playerID").setValue(playerId);
-
-                dismissAlertDialog();
-
-                if(task.isSuccessful()){
-                    setUserOnline();
-                    goToMainActivity();
-                }else {
-                    showAlertDialog(task.getException().getMessage(),true);
+                    if (task.isSuccessful()) {
+                        setUserOnline();
+                        goToMainActivity();
+                    } else {
+                        signUp(email, password);
+                        //                    showAlertDialog(task.getException().getMessage(),true);
+                    }
+                }
+                else {
+                    signUp(email, password);
                 }
             }
         });
@@ -126,17 +138,20 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToRegisterActivity() {
-        Intent intent = new Intent(LogInActivity.this, RegisterActivity.class);
-        startActivity(intent);
-    }
+//    private void goToRegisterActivity() {
+//        Intent intent = new Intent(LogInActivity.this, RegisterActivity.class);
+//        startActivity(intent);
+//    }
 
     private String getUserEmail() {
-        return mUserEmail.getText().toString().trim();
+        String email = mUserNicknameEditText.getText().toString().trim();
+        email += "@gmail.com";
+        return email;
     }
 
-    private String getUserPassword() {
-        return mUserPassWord.getText().toString().trim();
+    private String getUserPassword()
+    {
+        return "123456";
     }
 
     private void showAlertDialog(String message, boolean isCancelable){
@@ -157,4 +172,58 @@ public class LogInActivity extends AppCompatActivity {
         return playerID;
 
     }
+
+    private void signUp(String email, String password) {
+
+        showAlertDialog("Registering...",true);
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                dismissAlertDialog();
+
+                if(task.isSuccessful()){
+                    onAuthSuccess(task.getResult().getUser());
+                    // TODO registra o player ID
+//                    DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
+//                    String playerId = getPlayerID();
+//                    String userId = mAuth.getCurrentUser().getUid();
+//                    dataBase.child("users").child(userId).child("playerID").setValue(playerId);
+                }else {
+                    showAlertDialog(task.getException().getMessage(), true);
+                }
+            }
+        });
+    }
+
+    private void onAuthSuccess(FirebaseUser user) {
+        createNewUser(user.getUid());
+        goToMainActivity();
+    }
+
+    private void createNewUser(String userId){
+        User user = buildNewUser();
+        setDatabaseInstance();
+        mDatabase.child("users").child(userId).setValue(user);
+    }
+
+    private User buildNewUser() {
+        return new User(
+                getUserDisplayName(),
+                getUserEmail(),
+                UsersChatAdapter.ONLINE,
+                ChatHelper.generateRandomAvatarForUser(),
+                new Date().getTime(),
+                getPlayerID()
+        );
+    }
+
+    private String getUserDisplayName() {
+        return mUserNicknameEditText.getText().toString().trim();
+    }
+
+    private void setDatabaseInstance() {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+    }
+
 }

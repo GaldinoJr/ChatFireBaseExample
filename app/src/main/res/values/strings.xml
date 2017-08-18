@@ -8,7 +8,7 @@
 
 
     <!-- LogInActivity-->
-    <string name="login_error_message">Please make sure you enter a username and password!</string>
+    <string name="login_error_message">Please make sure you enter a username</string>
     <string name="login_error_title">Checking</string>
     <string name="title_activity_chat">Chat</string>
 
@@ -17,4 +17,6 @@
     <string name="error_incorrect_email_pass">Provide correct email and password with more than 6 characters.</string>
     <string name="enter_message">Enter message</string>
     <string name="send">SEND</string>
+    <string name="login_connect">Connect</string>
+    <string name="login_user_nickname">Nickname</string>
 </resources>

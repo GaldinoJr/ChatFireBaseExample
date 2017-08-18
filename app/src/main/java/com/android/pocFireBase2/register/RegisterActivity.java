@@ -169,7 +169,8 @@ public class RegisterActivity extends Activity{
                 getUserEmail(),
                 UsersChatAdapter.ONLINE,
                 ChatHelper.generateRandomAvatarForUser(),
-                new Date().getTime()
+                new Date().getTime(),
+                null
                 );
     }
 }

@@ -22,12 +22,13 @@ public class User {
     }
 
 
-    public User(String displayName, String email, String connection, int avatarId, long createdAt) {
+    public User(String displayName, String email, String connection, int avatarId, long createdAt, String playerID) {
         this.displayName = displayName;
         this.email = email;
         this.connection = connection;
         this.avatarId = avatarId;
         this.createdAt = createdAt;
+        this.playerID = playerID;
     }
 
 
