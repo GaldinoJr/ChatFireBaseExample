@@ -1,6 +1,5 @@
 package com.android.pocFireBase2.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.android.pocFireBase2.R;
+import com.android.pocFireBase2.adapter.UsersChatAdapter;
+import com.android.pocFireBase2.login.LogInActivity;
+import com.android.pocFireBase2.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -21,16 +24,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.android.pocFireBase2.R;
-import com.android.pocFireBase2.adapter.UsersChatAdapter;
-import com.android.pocFireBase2.login.LogInActivity;
-import com.android.pocFireBase2.model.User;
-import com.onesignal.OSPermissionSubscriptionState;
-import com.onesignal.OSSubscriptionState;
-import com.onesignal.OneSignal;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +31,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-/*
-* CAUTION: This app is still far away from a production app
-* Note: (1) Still fixing some code, and functionality and
-*       I don't use FirebaseUI, but recommend you to use it.
-* */
-
 public class MainActivity extends AppCompatActivity {
 
-
-    private static String TAG =  MainActivity.class.getSimpleName();
 
     @BindView(R.id.progress_bar_users) ProgressBar mProgressBarForUsers;
     @BindView(R.id.recycler_view_users) RecyclerView mUsersRecyclerView;
@@ -104,17 +88,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUsersKeyList() {
-        mUsersKeyList = new ArrayList<String>();
+        mUsersKeyList = new ArrayList<>();
     }
 
     private void setAuthListener() {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
                 hideProgressBarForUsers();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
                 if (user != null) {
                     setUserData(user);
                     queryAllUsers();

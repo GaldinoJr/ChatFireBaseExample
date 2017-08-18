@@ -19,4 +19,5 @@
     <string name="send">SEND</string>
     <string name="login_connect">Connect</string>
     <string name="login_user_nickname">Nickname</string>
+    <string name="shareknx_logo">ShareKnx Logo</string>
 </resources>
