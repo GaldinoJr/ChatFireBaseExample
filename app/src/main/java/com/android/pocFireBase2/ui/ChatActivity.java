@@ -2,8 +2,10 @@ package com.android.pocFireBase2.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ChatActivity extends Activity {
+public class ChatActivity extends AppCompatActivity {
 
     private static final String TAG = ChatActivity.class.getSimpleName();
 
@@ -49,10 +51,20 @@ public class ChatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_group_chat);
+        setSupportActionBar(toolbar);
+        setDisplayHomeAsUpEnabled(true);
+
         bindButterKnife();
         setDatabaseInstance();
         setUsersId();
         setChatRecyclerView();
+    }
+
+    public void setDisplayHomeAsUpEnabled(boolean enabled) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(enabled);
+        }
     }
 
     private void bindButterKnife() {

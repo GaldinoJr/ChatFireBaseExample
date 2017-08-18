@@ -3,11 +3,13 @@
 
     <color name="bg_user_message">#ffffff</color>
 
-    <color name="primary_dark">#E64A19</color>
-    <color name="primary">#FF5722</color>
-    <color name="accent">#448AFF</color>
+    <color name="primary_dark">#006064</color>
+    <color name="primary">#00aebc</color>
+    <color name="accent">#f7be07</color>
     <color name="divider">#B6B6B6</color>
-    <color name="text_color">#FFFFFF</color>
+    <color name="text_color">#3a414d</color>
     <color name="text_color_icon">#212121</color>
+
+    <color name="colorButton">#00aebc</color>
 
 </resources>

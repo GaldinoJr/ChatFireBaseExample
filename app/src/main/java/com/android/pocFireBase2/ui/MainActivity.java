@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +45,7 @@ import butterknife.ButterKnife;
 *       I don't use FirebaseUI, but recommend you to use it.
 * */
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
 
     private static String TAG =  MainActivity.class.getSimpleName();
@@ -64,12 +67,22 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_group_chat);
+        setSupportActionBar(toolbar);
+        setDisplayHomeAsUpEnabled(false);
+
         bindButterKnife();
         setAuthInstance();
         setUsersDatabase();
         setUserRecyclerView();
         setUsersKeyList();
         setAuthListener();
+    }
+
+    public void setDisplayHomeAsUpEnabled(boolean enabled) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(enabled);
+        }
     }
 
     private void bindButterKnife() {
@@ -174,6 +187,7 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_logout).setTitle(Html.fromHtml("<font color='#000000'>Logout</font>"));
         return true;
     }
 

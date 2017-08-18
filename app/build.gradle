@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "com.android.pocFireBase2"
         minSdkVersion 21
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [onesignal_app_id: "46e40424-3cc6-4944-ae3f-fdc0126900ad",
@@ -25,10 +25,10 @@ android {
 dependencies {
     compile 'com.android.support:recyclerview-v7:23.+'
     compile 'de.hdodenhof:circleimageview:2.0.0'
-
+    compile 'com.android.support:design:25.3.1'
     compile 'com.google.firebase:firebase-database:11.0.4'
     compile 'com.google.firebase:firebase-auth:11.0.4'
-    
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.jakewharton:butterknife:8.4.0'
 
     // Required for OneSignal

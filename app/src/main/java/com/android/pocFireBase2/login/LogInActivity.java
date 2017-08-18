@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -27,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LogInActivity extends Activity {
+public class LogInActivity extends AppCompatActivity {
 
     private static final String TAG = LogInActivity.class.getSimpleName();
     @BindView(R.id.edit_text_email_login) EditText mUserEmail;
@@ -41,7 +42,7 @@ public class LogInActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        hideActionBar();
+//        hideActionBar();
         bindButterKnife();
         setAuthInstance();
     }

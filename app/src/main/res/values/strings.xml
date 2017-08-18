@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">M Chat</string>
+    <string name="app_name">ShareKNX-POC-firebase</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -15,4 +15,6 @@
     <!-- RegisterActivity-->
     <string name="error_fields_empty">Please make sure you enter display name, email and password!</string>
     <string name="error_incorrect_email_pass">Provide correct email and password with more than 6 characters.</string>
+    <string name="enter_message">Enter message</string>
+    <string name="send">SEND</string>
 </resources>
